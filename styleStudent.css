@@ -44,9 +44,20 @@ ul li:hover{
     align-items: center;
 }
 
+.cuerpo2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .containerStudent{
     display: flex;
     align-items: end;
+}
+
+.containerStudent2{
+    display: inline-block;
+    align-items: center;
 }
 
 .labels{
@@ -63,8 +74,30 @@ ul li:hover{
     padding: 5px;
     border:2px solid;
     font-weight: 700;
-    margin: 0.5px 0.5px 0.5px 200px;
+    margin: 0.5px 0.5px 0.5px 100px;
+    
+}
 
+.labels2{
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
+
+.labels2 label{
+    width: 300px;
+    font-size: 20px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 5px;
+    border:2px solid;
+    font-weight: 700;
+    margin: 0.5px 0.5px 0.5px 200px;
+    
+}
+
+.labels2 label:hover{
+    background-color: rgb(126, 58, 253);
 }
 
 .barra{
@@ -83,9 +116,44 @@ ul li:hover{
 }
 
 .frases img{
-    width: 400px;
+    width: 100px;
 }
 
 .rightPerfil{
     width: 100px;
+}
+
+.recurso{
+    display: flex;
+}
+
+.recurso fieldset{
+    background-color: beige;
+    width: 300px;
+    height: 280px;
+    margin-right: auto;
+}
+
+.recurso img{
+    max-width: 50px;
+}
+
+.recurso fieldset{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.recurso label{
+    float: right;
+    justify-self: end;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px 0 0 15px;
+    border: 2px solid;
+}
+
+footer img{
+    max-width: 40px;
+    margin-top: 10px;
 }
