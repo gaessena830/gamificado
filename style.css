@@ -2,7 +2,6 @@ body{
     background-color: rgb(253, 253, 124);
     font-family: sans-serif;
 }
-
 h1{
     color: rgb(27, 27, 27);
     font-family: sans-serif;
@@ -10,7 +9,6 @@ h1{
     text-align: center;
     font-size: 60px;
 }
-
 .container{
     display: flex;
     justify-content: space-evenly;
@@ -30,7 +28,6 @@ h1{
     height: auto;
     aspect-ratio: 16/9;
 }
-
 .right a{
     font-family: sans-serif;
     text-decoration: none;
@@ -40,7 +37,6 @@ h1{
     font-size: 18px;
     font-weight: 700;
 }
-
 button{
     background-color: green;
     color: white;
@@ -50,7 +46,6 @@ button{
     border-radius: 15px;
     margin: 10px;
 }
-
 input{
     margin: 5px;
     height: 25px;
@@ -59,7 +54,6 @@ input{
     padding: 10px 15px;
    
 }
-
 footer{
     font-size: 20px;
     margin-top: 50px;
