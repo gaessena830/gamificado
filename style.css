@@ -2,6 +2,7 @@ body{
     background-color: rgb(253, 253, 124);
     font-family: sans-serif;
 }
+
 h1{
     color: rgb(27, 27, 27);
     font-family: sans-serif;
@@ -9,6 +10,7 @@ h1{
     text-align: center;
     font-size: 60px;
 }
+
 .container{
     display: flex;
     justify-content: space-evenly;
@@ -28,6 +30,7 @@ h1{
     height: auto;
     aspect-ratio: 16/9;
 }
+
 .right a{
     font-family: sans-serif;
     text-decoration: none;
@@ -37,6 +40,19 @@ h1{
     font-size: 18px;
     font-weight: 700;
 }
+
+.right #loginForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.right #loginForm button:active{
+    background-color: rgb(43, 214, 157);
+    color: rgb(43, 43, 44);
+}
+
 button{
     background-color: green;
     color: white;
@@ -46,14 +62,17 @@ button{
     border-radius: 15px;
     margin: 10px;
 }
+
 input{
     margin: 5px;
     height: 25px;
     font-size: 18px;
     border-radius: 9px;
     padding: 10px 15px;
-   
+    background-color: rgb(250, 250, 180) important;
+    color: rgb(128, 81, 43) important;
 }
+
 footer{
     font-size: 20px;
     margin-top: 50px;
@@ -71,7 +90,7 @@ footer{
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 10px;
     
 }
 .header a{
@@ -91,7 +110,7 @@ ul{
     font-size: 32px;
     background-color: aliceblue;
     padding: 30px;
-    border-style: solid;
+    border:  solid rgb(128, 81, 43);
     font-weight: 700;
     gap: 20px;
 }

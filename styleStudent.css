@@ -29,7 +29,7 @@ ul{
     font-size: 32px;
     background-color: aliceblue;
     padding: 30px;
-    border-style: solid;
+    border: solid rgb(128, 81, 43);
     font-weight: 700;
     gap: 20px;
 }
@@ -116,7 +116,7 @@ ul li:hover{
 }
 
 .frases img{
-    width: 100px;
+    width: 400px;
 }
 
 .rightPerfil{

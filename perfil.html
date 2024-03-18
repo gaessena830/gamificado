@@ -4,44 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Cursos Asignados</title>
 </head>
 <body>
     <div class="header">
         <ul>
-            <li><a href="">Cursos</a></li>
+            <li><a href="./cursos.html">Cursos</a></li>
             <li><a href="">Recursos Educativos</a></li>
-            <li><a href="">Anuncios y Comunicaciones</a></li>
+            <li><a href="./anuncios.html">Anuncios y Comunicaciones</a></li>
         </ul>
     </div>
     <div class="containerCursos">
         <div class="right">
+                <label id="username"></label>
                 <img class="imagenPerfil" src="./images/perfil-blanco.png" alt="s">
         </div>
+        
         <div class="rightPerfil">
             <div class="labelGroup">
+                
                 <label for="docente">Docente:</label>
-                <label for="docente">Pedro Avila</label>
+                <label id="docente"></label>
                 
             </div>
             <div class="labelGroup">
-                <label for="fechaIngreso">Fecha de Ingreso: </label>
-                <label for="">2019-02-01</label>
+                <label for="identificacion">Identificacion: </label>
+                <label id="identificacion"></label>
             </div>
             <div class="labelGroup">
                 <label for="telefono">Teléfono:</label>
-                <label for="">3001234567</label>
+                <label id="telefono"></label>
                 
             </div>
             <div class="labelGroup">
                 <label for="correo">Correo:</label>
-                <label for="">peaviladocente@colegio.edu</label>
+                <label id="correo"></label>
                 
             </div>
         </div>
     </div>
     <footer>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, praesentium doloribus aperiam similique iste aspernatur? Sed veniam nostrum voluptate sint nisi, molestiae neque. Eaque illo corrupti dicta sed ex pariatur.
+        Las tareas y logros pueden incluir lecciones, ejercicios, foros de discusión, entre otros. Los estudiantes podrán completar tareas y lograr insignias en base a su progreso.
     </footer>
+    <script>
+        var username= localStorage.getItem("gamificadouser");
+        document.getElementById("username").textContent = "Bienvenido "+ username;
+        
+        // Definir la URL de la consulta con el parámetro 'username'
+        var url = '../gamificado_back/readUser.php?username=' + encodeURIComponent(username);
+
+        // Realizar la solicitud GET
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta aquí
+            console.log(data);
+            document.getElementById("docente").textContent = data.nombre + " " + data.apellidos;
+            document.getElementById("identificacion").textContent = data.identificacion;
+            document.getElementById("telefono").textContent = data.telefono;
+            document.getElementById("correo").textContent = data.correo;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    </script>
 </body>
 </html>

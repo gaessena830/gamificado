@@ -1,154 +1,59 @@
-body{
-    background-color: rgb(253, 253, 124);
-    font-family: sans-serif;
-}
-
-h1{
-    color: rgb(27, 27, 27);
-    font-family: sans-serif;
-    font-weight: 900;
-    text-align: center;
-    font-size: 60px;
-}
-
-.container{
+.right-button{
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 80px;
-}
-.right{
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-top: 30px;
-    
+    justify-content: center;
+    align-items: center;
 }
 
 .right img{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/9;
+    margin-inline: auto;
 }
 
-.right a{
-    font-family: sans-serif;
-    text-decoration: none;
-    color: rgb(57, 22, 212);
-    text-align: center;
-    margin: 10px;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-button{
-    background-color: green;
+.right-button button{
+    background-color: rgb(36, 47, 202);
     color: white;
     font-size: 18px;
     font-weight: 500;
     padding: 10px;
     border-radius: 15px;
     margin: 10px;
+    
 }
 
-input{
-    margin: 5px;
-    height: 25px;
-    font-size: 18px;
-    border-radius: 9px;
-    padding: 10px 15px;
-   
-}
-
-footer{
-    font-size: 20px;
-    margin-top: 50px;
-    font-weight: 700;
-}
-
-.containerCursos{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.header {
-
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 50px;
-
-}
-.header a{
-    text-decoration: none;
-    color: rgb(43, 43, 44);
-}
-
-ul{
-    list-style: none;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%;
-    margin-top: 10px;
-    font-size: 32px;
-    background-color: aliceblue;
-    padding: 30px;
-    border-style: solid;
-    font-weight: 700;
-}
-
-ul li:hover{
-    background-color: rgb(126, 58, 253);
-}
-
-
-
-
-
-.custom-btn {
-    padding: 10px; /* Elimina el relleno para ajustarse al tamaño de las palabras */
-    font-size: 24px; /* Ajusta el tamaño de fuente según sea necesario */
-    background-color: rgb(103, 76, 225);
-    border: 30%; /* Elimina el borde para que se ajuste al texto */
-    border-radius: 0%;
-    margin-left: 22%;
-    margin-top: 05%;
-}
-
-.right .imagenPerfil1{
-    width: 350px;
-    height: auto;
-    aspect-ratio: 3/4;
-}
-.rightPerfil1{
-    display: flex;
-    justify-content: space-between;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 30px;
+.right-button button:hover{
+    background-color: rgb(41, 188, 233);
     
 }
 
 .labelGroup {
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px; /* Espacio entre cada grupo de etiqueta y valor */
-    margin-top: 40px;
+    margin-bottom: 10px; /* Espacio entre cada grupo de etiqueta y valor */
 }
 
 .labelGroup label {
-    width: 120px; /* Ancho fijo para las etiquetas */
-    text-align: center; /* Alineación de texto a la centro */
-    margin-right: 100px; /* Espacio entre la etiqueta y el valor */
-    font-size: 24px;
+    justify-content: left;
+    font-size: 26px;
+    width: 180px;
+    text-align: left;
+    font-weight: 700;
+    text-wrap: nowrap;
+    margin-right: 120px;
 }
 
 .labelGroup span {
     flex: 1; /* Para que los spans ocupen todo el espacio restante */
     font-size: 24px; /* Tamaño de fuente */
-    font-weight: normal; /* Peso de fuente normal */
-    text-align: center; /*alineación centro*/
+    text-align: end; /*alineación centro*/
+}
+
+.rightPerfil{
+    margin-top: 5px;
+    margin-right: 50px;
+}
+
+footer{
+    padding: 0;
+}
+
+.right-button a{
+    color: white;
+    font-size: 16px;
 }

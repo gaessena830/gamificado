@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso ADSO Sena</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styleNewUser.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<h1>SOFTWARE EDUCATIVO</h1>
+<div class="container">
+    <div class="left">
+            <img src="./images/strat.png" alt="s">
+    </div>
+    <div class="right">
+        <form id="loginForm" autocomplete="off">
+            <input type="text" id="username" placeholder="Username" autocomplete="off">
+            <input type="password" id="password" placeholder="Password" autocomplete="off">
+            <button type="submit" id="Ingresar">Ingresar</button>
+            <a href="">Olvidé mi contraseña</a>
+            <a href="./newUser.html">Registro >> </a>
+        </form>
+    </div>
+</div>
+<div id="mensaje"></div>
+<footer>
+    Gamificación es una técnica de enseñanza que utiliza elementos de entretenimiento y juegos para motivar a los estudiantes a aprender. En este proyecto, se implementará gamificación en un software educativo para ayudar a los estudiantes a mejorar su aprendizaje.
+</footer>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+
+        let data = {
+            user: username,
+            pass: password
+        };
+
+        fetch('../gamificado_back/login.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.status === 'success') {
+                // Si el inicio de sesión fue exitoso
+                //alert(data.page);
+                localStorage.setItem("gamificadouser",username);
+                document.getElementById('mensaje').textContent = data.message;
+                //window.location.href = './perfil.html';
+                window.location.href=data.page;
+            } else {
+                // Si hubo un error en el inicio de sesión
+                alert(data.page);
+                document.getElementById('mensaje').textContent = data.message;
+            }
+        })
+        .catch(error => {
+            alert(error);
+            //console.error('Error:', error);
+            // Convertir el error a formato JSON
+            let errorMessage = {
+                status: 'error',
+                message: error.message
+            };
+        console.log('Error:', JSON.stringify(errorMessage));
+        });
+    });
+</script>
+</body>
+</html>

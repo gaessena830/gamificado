@@ -3,43 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleStudent.css">
-    <title>Cursos Asignados</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styleD1.css">
+    <title>Perfil Estudiante</title>
 </head>
 <body>
     <div class="header">
         <ul>
-            <li><a href="">Cursos</a></li>
-            <li><a href="">Recursos Educativos</a></li>
-            <li><a href="">Anuncios y Comunicaciones</a></li>
+            <li><a href="./">Cursos</a></li>
+            <li><a href="./recursos.html">Recursos Educativos</a></li>
+            <li><a href="./anuncios.html">Anuncios y Comunicaciones</a></li>
         </ul>
     </div>
-    <div class="cuerpo">
-        <div class="containerStudent">
-            
-                <div class="labels">
-                    <label for="">Mi Perfil</label>
-                    <label for="">Mis Cursos</label>
-                    <label for="">Puntaje y Medallero</label>
-                    <label for="">Juegos Abordados</label>
-                    <label for="">Evidencias</label>
-                    <label for="">Calificaciones</label>
-                    <label for="">Muro</label>
-                    <div>&nbsp;</div>
-                </div>
-                <div class="barra">
-                </div>
-                
-            
+    <div class="containerCursos">
+        <div class="right">
+            <label id="username"></label>
+            <img class="imagenPerfil" src="./images/perfil-blanco.png" alt="s"> 
+        <div class="right-button">
+            <button type="button" class="">
+                <a href="./perfilJugador.html">Perfil Del Jugador</a>
+            </button>
+        </div>    
         </div>
-        <div class="frases">
-            <img src="./images/FMpCM4hXwAMZqwq.jpg" alt="">
-        </div>
+        
         <div class="rightPerfil">
-            
+            <div class="labelGroup">
+                <label for="estudiante">Estudiante:</label>
+                <span id="estudiante"></span>
+            </div>
+            <div class="labelGroup">
+                <label for="grado">Grado:</label>
+                <span id="grado"></span>
+            </div>
+            <div class="labelGroup">
+                <label for="fechaIngreso">Fecha de Ingreso: </label>
+                <span id="fechaIngreso"></span>
+            </div>
+            <div class="labelGroup">
+                <label for="telefono">Teléfono:</label>
+                <span id="telefono"></span>
+            </div>
+            <div class="labelGroup">
+                <label for="correo">Correo:</label>
+                <span id="correo"></span>
+            </div>
+            <div class="labelGroup">
+                <label for="niveldeIngles">Nivel de inglés:</label>
+                <span id="niveldeIngles"></span>
+            </div>
+            <div class="labelGroup">
+                <label for="niveldeMatematicas">Nivel de Matemáticas:</label>
+                <span id="niveldeMatematicas"></span>
+            </div>
         </div>
     </div>
     <footer>
+        La gamificación puede ayudar a los estudiantes a mejorar sus hábitos de estudio y a mantener su interés en la educación. Al incentivarlos a completar tareas y logros, se puede ver una mejora en el rendimiento académico y en la motivación para estudiar.
     </footer>
 </body>
+<script>
+    var username= localStorage.getItem("gamificadouser");
+    document.getElementById("username").textContent = "Bienvenido "+ username;
+    
+    // Definir la URL de la consulta con el parámetro 'username'
+    var url = '../gamificado_back/readUser.php?username=' + encodeURIComponent(username);
+
+    // Realizar la solicitud GET
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Manejar la respuesta aquí
+        console.log(data);
+        document.getElementById("estudiante").textContent = data.nombre + " " + data.apellidos;
+        document.getElementById("grado").textContent = data.grado;
+        document.getElementById("fechaIngreso").textContent = data.fechaIngreso;
+        document.getElementById("correo").textContent = data.correo;
+        document.getElementById("niveldeIngles").textContent = data.nivelIngles;
+        document.getElementById("niveldeMatematicas").textContent = data.nivelMatematicas;
+        document.getElementById("telefono").textContent = data.telefono;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+</script>
+
 </html>

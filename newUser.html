@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./styleNewUser.css">
+    <title>Registro</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <H2>Registro Nuevo Usuario</H2>
+    <div class="container">
+        <div class="left">
+            <img src="./images/strat.png" alt="s">
+        </div>
+        <div class="right">
+            <div class="loginForm">
+                <label class="selrol" for="rol">Selecciona el rol :</label>
+                <select id="rol" name="rol">
+                    <option value="">Selecciona</option>
+                    <option value="docente">Docente</option>
+                    <option value="estudiante">Estudiante</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="modalDocente" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Nuevo Docente</h3>
+            <form id="loginFormDoc">
+                <div class="loginFormDoc">
+                    <div class="formleft">
+                        <input type="text" id="nombred" placeholder="Nombres">
+                        <input type="text" id="apellidosd" placeholder="Apellidos">
+                        <input type="number" id="identificaciond" placeholder="Identificacion">
+                        <input type="email" id="correod" placeholder="Email">
+                    </div>
+                    <div class="formright">
+                        <input type="number" id="telefonod" placeholder="Telefono">    
+                        <input type="text" id="usernamed" placeholder="Username" autocomplete="false">
+                        <input type="password" id="passwordd" placeholder="Password" autocomplete="false">
+                        <input type="password" id="confirmPasswordd" placeholder="Repeat password" autocomplete="false">
+                    </div>
+                    <input type="hidden" id="rold" value="docente">
+                </div>
+                <span id="passwordErrorD" class="error"></span>
+                <span id="emailErrorD" class="error"></span>
+                <button type="submit" id="RegistroDocd">Registro</button>
+            </form>
+        </div>
+    </div>
+    <div id="modalEstudiante" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Nuevo Estudiante</h3>
+            <form id="loginFormEst">
+                <div class="loginFormEst">
+                    <div class="formleft">
+                        <input type="text" id="nombree" placeholder="Nombres">
+                        <input type="text" id="apellidose" placeholder="Apellidos">
+                        <input type="number" id="identificacione" placeholder="Identificacion">
+                        <input type="email" id="correoe" placeholder="Email">
+                        <input type="text" id="gradoe" placeholder="Grado">
+                        <input type="text" id="nivelinglese" placeholder="Nivel Inglés">
+                    </div>
+                    <div class="formright">
+                        <input type="number" id="telefonoe" placeholder="Telefono">    
+                        <input type="text" id="usernamee" placeholder="Username" autocomplete="false">
+                        <input type="password" id="passworde" placeholder="Password" autocomplete="false">
+                        <input type="password" id="confirmPassworde" placeholder="Repeat password" autocomplete="false">
+                        <input type="date" id="fechaingresoe" placeholder="Fecha Ingreso">
+                        <input type="text" id="nivelmatematicae" placeholder="Nivel Matem...">
+                    </div>
+                    <input type="hidden" id="rolee" value="estudiante">
+                </div>
+                <span id="passwordErrore" class="error"></span>
+                <span id="emailError" class="error"></span>
+                <button type="submit" id="RegistroEst">Registro</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        Gamificación es una técnica de enseñanza que utiliza elementos de entretenimiento y juegos para motivar a los estudiantes a aprender. En este proyecto, se implementará gamificación en un software educativo para ayudar a los estudiantes a mejorar su aprendizaje.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <script>
+        let hashedPassword;
+        // Función para abrir el modal correspondiente según la selección del rol
+        document.getElementById('rol').addEventListener('change', function() {
+            let selectedRol = this.value;
+            if (selectedRol === 'docente') {
+                document.getElementById('modalDocente').style.display = "block";
+            } else if (selectedRol === 'estudiante') {
+                document.getElementById('modalEstudiante').style.display = "block";
+            }
+        });
+
+        // Función para cerrar los modales al hacer clic en la 'x'
+        let closeButtons = document.querySelectorAll(".close");
+        for (let i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].addEventListener('click', function() {
+                this.parentElement.parentElement.style.display = "none";
+            });
+        }
+
+        document.getElementById('loginFormDoc').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let password = document.getElementById('passwordd').value;
+            let confirmPassword = document.getElementById('confirmPasswordd').value;
+            hashPasswordD();
+            // Validación de contraseña y confirmación
+            if (password !== confirmPassword) {
+                document.getElementById('passwordErrorD').textContent = "Las contraseñas no coinciden";
+            } else {
+                // Si las contraseñas coinciden, puedes enviar el formulario
+                //alert("Formulario enviado correctamente");
+                let nombre = document.getElementById('nombred').value;
+                let apellidos = document.getElementById('apellidosd').value;
+                let identificacion = document.getElementById('identificaciond').value;
+                let correo = document.getElementById('correod').value;
+                let telefono = document.getElementById('telefonod').value;
+                let rol = document.getElementById('rol').value;
+                let username = document.getElementById('usernamed').value;
+                let password = hashedPassword;
+                let emailError = document.getElementById('emailErrorD');
+
+
+                if (!isValidEmail(correo)) {
+                    emailError.textContent = "Por favor, ingresa un correo electrónico válido.";
+                    return;
+                 }
+                let data = {
+                    nombre: nombre,
+                    apellidos: apellidos,
+                    identificacion: identificacion,
+                    correo: correo,
+                    telefono: telefono,
+                    rol: rol,
+                    username: username,
+                    password: password
+                };
+                fetch('http://localhost/gamificado_back/createUser.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Usuario creado correctamente') {
+                        // Si el usuario se creó correctamente
+                        alert(data.message);
+                        window.location.href = './index.html';
+                    } else {
+                        // Si hubo un error al crear el usuario
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error en la solicitud. Por favor, inténtalo de nuevo más tarde.');
+                    console.error('Error:', error);
+                });
+                   
+            }
+        });
+
+        document.getElementById('loginFormEst').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let password = document.getElementById('passworde').value;
+            let confirmPassword = document.getElementById('confirmPassworde').value;
+            hashPasswordE();
+            
+            // Validación de contraseña y confirmación
+            if (password !== confirmPassword) {
+                
+                document.getElementById('passwordErrore').textContent = "Las contraseñas no coinciden";
+            } else {
+                // Si las contraseñas coinciden, puedes enviar el formulario
+                let nombre = document.getElementById('nombree').value;
+                let apellidos = document.getElementById('apellidose').value;
+                let identificacion = document.getElementById('identificacione').value;
+                let correo = document.getElementById('correoe').value;
+                let telefono = document.getElementById('telefonoe').value;
+                let rol = document.getElementById('rol').value;
+                let username = document.getElementById('usernamee').value;
+                let password = hashedPassword;
+                let grado = document.getElementById('gradoe').value;
+                let nivelingles=document.getElementById('nivelinglese').value;
+                let fechaingreso=document.getElementById('fechaingresoe').value;
+                let nivelmatematicas=document.getElementById('nivelmatematicae').value;
+                let emailError = document.getElementById('emailError');
+
+                if (!isValidEmail(correo)) {
+                    emailError.textContent = "Por favor, ingresa un correo electrónico válido.";
+                    return;
+                 }
+                let data = {
+                    nombre: nombre,
+                    apellidos: apellidos,
+                    identificacion: identificacion,
+                    correo: correo,
+                    telefono: telefono,
+                    rol: rol,
+                    username: username,
+                    password: password,
+                    grado: grado,
+                    nivelingles: nivelingles,
+                    fechaingreso: fechaingreso,
+                    nivelmatematicas: nivelmatematicas
+                };
+                fetch('http://localhost/gamificado_back/createUser.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Usuario creado correctamente') {
+                        // Si el usuario se creó correctamente
+                        alert(data.message);
+                        window.location.href = './index.html';
+                    } else {
+                        // Si hubo un error al crear el usuario
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error en la solicitud. Por favor, inténtalo de nuevo más tarde.');
+                    console.error('Error:', error);
+                });
+            }
+        });
+        function isValidEmail(email) {
+            // Patrón de expresión regular para validar correo electrónico
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        function hashPasswordD() {
+            var passwordInput = document.getElementById("passwordd");
+            var password = passwordInput.value;
+            
+            hashedPassword = CryptoJS.SHA256(password).toString();
+            
+            // Reemplaza el valor del campo de contraseña con el hash
+            passwordInput.value = hashedPassword;
+        }
+        function hashPasswordE() {
+            var passwordInput = document.getElementById("passworde");
+            var password = passwordInput.value;
+            
+            hashedPassword = CryptoJS.SHA256(password).toString();
+            
+            // Reemplaza el valor del campo de contraseña con el hash
+            passwordInput.value = hashedPassword;
+        }
+    </script>
+</body>
+</html>
